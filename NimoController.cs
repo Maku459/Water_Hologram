@@ -7,6 +7,8 @@ public class NimoController : MonoBehaviour
 
     public Arduino arduino;
     public int pinValueX;
+    public int i;
+    public float speed = 0.1f;
 
     private GameObject nimo;
    // private GameObject cube;
@@ -37,10 +39,18 @@ public class NimoController : MonoBehaviour
             double degX = Mathf.Atan2(pinValueX, -1) / 3.14159 * 180.0 * 100;
 
             nimo.transform.rotation = Quaternion.Euler((float)degX, 90, 180);
+            i++;
+            if(i > 950){
+                transform.Rotate(-40, 0, 0);
+            }
         }
-        else
-        {
+        else{
             transform.rotation = Quaternion.Euler(0, 90, 180);
+            if (i > 1000 && i < 1030){
+                transform.position += transform.up * speed;
+            }else if(i > 1030 || i < 999){
+                i = 0;
+            }
         }
         /*
         if(pinValueX > 400){
